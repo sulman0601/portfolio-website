@@ -1,0 +1,27 @@
+name: linting-pipeline
+on:
+    push:
+         branches:
+         -develop
+         pull request:
+         branches:
+             -develop
+    jobs:
+         linting-jobs:
+         runs-on: ubuntu-latest
+         steps:
+            -name: chechout Repository
+            uses: actions/checkout@v4
+            -name: Install HTMLHint
+            run: npm install --save-dev htmlhint
+            -name: Install Stylelint
+            run: npm install --save-dev stylelint
+            -name: Lint Html Files
+           run: npx htmlhint "**/*.html"
+      -name: Lint css Files
+      run: npx stylelint "**/*.css"
+      -name: Display Package.json Contents
+      run: cat package.json
+
+
+
